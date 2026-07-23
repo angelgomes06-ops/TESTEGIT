@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jundiaí: Terra da Uva e Aconchego</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           1. CSS VARIABLES & RESET
+           ========================================================================== */
+        :root {
+            --primary: #2d5a27;      /* Verde Serra do Japi */
+            --primary-light: #e8f0e6;
+            --secondary: #8b263e;    /* Vinho / Uva Niagara */
+            --accent: #e5a93c;       /* Sol / Rota da Cerveja */
+            --bg: #fafafa;
+            --surface: #ffffff;
+            --text-main: #2b2d42;
+            --text-muted: #6c757d;
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        /* ==========================================================================
+           2. HEADER & HERO
+           ========================================================================== */
+        header {
+            background: linear-gradient(135deg, rgba(45, 90, 39, 0.95), rgba(20, 45, 17, 0.95)),
+                        url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1200&auto=format&fit=crop') center/cover;
+            color: white;
+            padding: 80px 20px 60px;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: #d1e2ce;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-weight: 400;
+        }
+
+        .badge-city {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* ==========================================================================
+           3. CONTAINER & TABS (INTERACT)
+           ========================================================================== */
+        .container {
+            max-width: 1100px;
+            margin: -30px auto 0;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            background: var(--surface);
+            padding: 8px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tab-btn:hover {
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ==========================================================================
+           4. CARDS GRID & CONTENT
+           ========================================================================== */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+
+        .tab-content.active {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-tag {
+            align-self: flex-start;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--secondary);
+            background: rgba(139, 38, 62, 0.08);
+            padding: 4px 12px;
+            border-radius: 50px;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .card-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        /* Highlight box dentro do card */
+        .fact-highlight {
+            background: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            padding: 12px 16px;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* ==========================================================================
+           5. FOOTER
+           ========================================================================== */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        footer span {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Hero Section -->
+    <header>
+        <div class="badge-city">📍 Estado de São Paulo</div>
+        <h1 class="hero-title">Jundiaí em Detalhes</h1>
+        <p class="hero-subtitle">Descubra os fatos fascinantes, a natureza exuberante e a rica herança cultural da Terra da Uva.</p>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="container">
+        
+        <!-- Navigation Tabs -->
+        <nav class="nav-tabs" aria-label="Navegação de Curiosidades">
+            <button class="tab-btn active" data-target="historia">🍇 Origem & Uva</button>
+            <button class="tab-btn" data-target="natureza">🌿 Serra do Japi</button>
+            <button class="tab-btn" data-target="moderna">🚀 Qualidade de Vida</button>
+        </nav>
+
+        <!-- Tab 1: História & Uva -->
+        <section id="historia" class="tab-content active">
+            <article class="card">
+                <div>
+                    <span class="card-tag">Mutação Genética</span>
+                    <h2 class="card-title">A Uva Niagara Rosada</h2>
+                    <p class="card-text">Em 1933, no bairro do Traviú, uma mutação genética natural em um parreiral de uvas brancas deu origem à **Niagara Rosada**. Esse acontecimento transformou Jundiaí na capital nacional da variedade.</p>
+                </div>
+                <div class="fact-highlight">💡 Curiosidade: Descoberta por acaso pelo agricultor Antonio Carbonari!</div>
+            </article>
+
+            <article class="card">
+                <div>
+                    <span class="card-tag">Tradição</span>
+                    <h2 class="card-title">A 1ª Festa da Uva (1934)</h2>
+                    <p class="card-text">A primeira edição da famosa Festa da Uva aconteceu em 1934 para celebrar a nova uva rosada e reerguer os produtores após crises econômicas. Mais de 100 mil pessoas visitaram a cidade na época.</p>
+                </div>
+                <div class="fact-highlight">🍷 Hoje o evento atrai centenas de milhares de visitantes por ano.</div>
+            </article>
+
+            <article class="card">
+                <div>
+                    <span class="card-tag">Patrimônio</span>
+                    <h2 class="card-title">A Origem do Nome</h2>
+                    <p class="card-text">O nome "Jundiaí" vem do Tupi-Guarani (*yundia'ý*) e significa **"Rio dos Jundiás"** (um tipo de peixe de água doce abundante nos rios da região no século XVII).</p>
+                </div>
+                <div class="fact-highlight">🐟 Fundada oficialmente como vila em 1655.</div>
+            </article>
+        </section>
+
+        <!-- Tab 2: Natureza -->
+        <section id="natureza" class="tab-content">
+            <article class="card">
+                <div>
+                    <span class="card-tag">Ecologia</span>
+                    <h2 class="card-title">O "Colchão Verde"</h2>
+                    <p class="card-text">A Serra do Japi é uma das raras áreas de Mata Atlântica preservadas sobre rochas quartzíticas no mundo. É apelidada de "Castelo de Águas" devido às suas inúmeras nascentes puras.</p>
+                </div>
+                <div class="fact-highlight">🌳 Declarada Reserva da Biosfera pela UNESCO.</div>
+            </article>
+
+            <article class="card">
+                <div>
+                    <span class="card-tag">Biodiversidade</span>
+                    <h2 class="card-title">Santuário das Borboletas</h2>
+                    <p class="card-text">A Serra abriga quase **40% de todas as espécies de borboletas** registradas em todo o estado de São Paulo, atraindo pesquisadores e fotógrafos do mundo inteiro.</p>
+                </div>
+                <div class="fact-highlight">🦋 Mais de 800 espécies catalogadas na região.</div>
+            </article>
+        </section>
+
+        <!-- Tab 3: Cidade Moderna -->
+        <section id="moderna" class="tab-content">
+            <article class="card">
+                <div>
+                    <span class="card-tag">Infância</span>
+                    <h2 class="card-title">Cidade das Crianças</h2>
+                    <p class="card-text">Jundiaí é a primeira cidade do estado a integrar a rede internacional *Urban95*, adaptando espaços públicos para o desenvolvimento saudável de crianças de até 6 anos.</p>
+                </div>
+                <div class="fact-highlight">👶 Destaque nacional em políticas públicas infantis.</div>
+            </article>
+
+            <article class="card">
+                <div>
+                    <span class="card-tag">Gastronomia</span>
+                    <h2 class="card-title">Rota da Cerveja & Vinho</h2>
+                    <p class="card-text">Além do famoso "Polentão" do Caxambu, Jundiaí se tornou um hub de microcervejarias artesanais premiadas, rivalizando com a tradicional produção de vinhos artesanais.</p>
+                </div>
+                <div class="fact-highlight">🍺 Mais de 20 cervejarias artesanais ativas na região.</div>
+            </article>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Desenvolvido com <span>♥</span> para celebrar a história de Jundiaí - SP</p>
+    </footer>
+
+    <!-- JavaScript Vanilla ES6+ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-btn');
+            const contents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const targetId = tab.getAttribute('data-target');
+
+                    // Remove estado ativo de todos os botões e conteúdos
+                    tabs.forEach(btn => btn.classList.remove('active'));
+                    contents.forEach(content => content.classList.remove('active'));
+
+                    // Adiciona estado ativo no botão clicado e na aba correspondente
+                    tab.classList.add('active');
+                    const activeContent = document.getElementById(targetId);
+                    
+                    if (activeContent) {
+                        activeContent.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
